@@ -728,18 +728,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2410439498685766182, guid: 07167a79123c26642889382d3aa644e8, type: 3}
   m_PrefabInstance: {fileID: 2410439497311910102}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1347115335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347115334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef5a2771dbc902048816fb57d4ac1167, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1411284798
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,6 +932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698577052}
   - component: {fileID: 1698577051}
+  - component: {fileID: 1698577053}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -979,6 +968,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1698577053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698577050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9546f15ef54ea414d841278f8a2a67f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2052155975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1118,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1347115335, guid: 07167a79123c26642889382d3aa644e8, type: 3}
+      propertyPath: destination
+      value: mystery
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347115337, guid: 07167a79123c26642889382d3aa644e8, type: 3}
+      propertyPath: defaultColor.b
+      value: 0.4716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347115337, guid: 07167a79123c26642889382d3aa644e8, type: 3}
+      propertyPath: defaultColor.g
+      value: 0.4716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347115337, guid: 07167a79123c26642889382d3aa644e8, type: 3}
+      propertyPath: defaultColor.r
+      value: 0.4716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347115337, guid: 07167a79123c26642889382d3aa644e8, type: 3}
+      propertyPath: inertConfig.emission
+      value: 2.14
+      objectReference: {fileID: 0}
     - target: {fileID: 2410439498685766181, guid: 07167a79123c26642889382d3aa644e8, type: 3}
       propertyPath: m_RootOrder
       value: 5

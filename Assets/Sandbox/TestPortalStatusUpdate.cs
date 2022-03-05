@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TestPortalStatusUpdate : MonoBehaviour
 {
-    public GameObject testPortalInstance;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +15,19 @@ public class TestPortalStatusUpdate : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            testPortalInstance.GetComponent<PortalStatus>().SetStatus("active");
+            PortalStatus[] portalList = FindObjectsOfType<PortalStatus>();
+            foreach (PortalStatus portal in portalList)
+            {
+                portal.SetStatus("active");
+            }
         }
         if (Input.GetKeyUp("space"))
         {
-            testPortalInstance.GetComponent<PortalStatus>().SetStatus("inert");
-        }
-        if (Input.GetKeyDown("left"))
-        {
-            testPortalInstance.GetComponent<PortalStatus>().RerollColor();
+            PortalStatus[] portalList = FindObjectsOfType<PortalStatus>();
+            foreach (PortalStatus portal in portalList)
+            {
+                portal.SetStatus("inert");
+            }
         }
     }
 }
