@@ -53,35 +53,30 @@ public class LoadingManager : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
 
         UpdateLabel("Enchanting Portals...");
         while (Initialization.currentStage == InitializationStage.Portals)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
 
         UpdateLabel("Summoning Creatures...");
         while (Initialization.currentStage == InitializationStage.Creatures)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
 
         UpdateLabel("Transmuting Events...");
         while (Initialization.currentStage == InitializationStage.Interactables)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
 
         UpdateLabel("Dispelling Clutter...");
         while (Initialization.currentStage != InitializationStage.Done)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
 
         SceneManager.UnloadSceneAsync(currentScene);
         // Maybe transition scene to a better effect here?

@@ -18,7 +18,7 @@ public class RoomNode
     public int Level { get; private set; }
     public string Biome { get; private set; }
 
-    private List<Component> components;
+    public List<Component> Components { get; private set; }
 
     public RoomNode(int id, int level, string biome)
     {
@@ -26,14 +26,14 @@ public class RoomNode
         this.Level = level;
         this.Biome = biome;
 
-        this.components = new List<Component>();
+        this.Components = new List<Component>();
     }
 
     // Insert the given component as something that will spawn in the room.
     // Should there be a limit to the number of encounters?
     public void AddComponent(Component component)
     {
-        components.Add(component);
+        Components.Add(component);
     }
 
     public override string ToString()

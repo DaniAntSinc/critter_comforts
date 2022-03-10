@@ -23,7 +23,7 @@ public static class RunData
     // Run Data
     private static int Score; // Rather than a single integer, the score will be composed of different pieces. Maybe a score SO, instead?
     private static TreeNode<RoomNode> Map;
-    private static int CurrentRoom; // ???
+    private static TreeNode<RoomNode> CurrentRoom;
     //[Not yet implemented] private Creature[] Team
 
     // Clear out all data from any previous runs
@@ -44,11 +44,22 @@ public static class RunData
     {
         // Where's the cursor?
         Map = root;
+        CurrentRoom = root;
+    }
+
+    public static void AdvanceToRoom(TreeNode<RoomNode> nextRoom)
+    {
+        CurrentRoom = nextRoom;
     }
 
     public static TreeNode<RoomNode> GetMap()
     {
         return Map;
+    }
+
+    public static TreeNode<RoomNode> GetRoom()
+    {
+        return CurrentRoom;
     }
 
     public static void StartRun()

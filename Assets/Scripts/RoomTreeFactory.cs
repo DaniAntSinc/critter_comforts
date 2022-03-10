@@ -4,11 +4,13 @@ using System.Linq;
 
 public class RoomTreeFactory
 {
-    private readonly int MAX_DEPTH = 10;
+    public const int MAX_DEPTH = 10;
+    // Rather than const arrays, a config should be used to allow custom runs, like all bosses
+    // These are zero-indexed - the 10th room has index 9.
     private readonly int[] BOSS_LEVELS = { 9 };
     private readonly int[] MINIBOSS_LEVELS = { 4 };
-    private readonly int[] SHOP_LEVELS = { 3, 6, 8 };
-    private readonly int[] BONDING_LEVELS = { 3, 7 };
+    private readonly int[] SHOP_LEVELS = { 3, 5, 8 };
+    private readonly int[] BONDING_LEVELS = { 2, 5, 7 };
     private readonly int MAX_PORTALS_PER_ROOM = 2;
 
     private int nodeCount;
@@ -81,9 +83,9 @@ public class RoomTreeFactory
     public TreeNode<RoomNode> Create()
     {
         // TODO get seeded rng
-        RoomNode start = CreateRoomNode(0);
+        RoomNode start = CreateRoomNode(1);
         TreeNode<RoomNode> root = new TreeNode<RoomNode>(start);
-        Populate(root, 0);
+        Populate(root, 2);
 
         return root;
     }

@@ -49,7 +49,10 @@ public static class RunDataManager
     public static void CheckExtensionNeeded()
     {
         // TODO If the current node's a leaf and isn't at the needed depth, populate again.
-        Debug.Log("[NE] Skipping extension check");
+        if (RunData.GetRoom().IsLeaf && RunData.GetRoom().Level < RoomTreeFactory.MAX_DEPTH)
+        {
+            Debug.Log("[NE] Room extension not implemented");
+        }
     }
 
     /*
@@ -59,19 +62,42 @@ public static class RunDataManager
     {
         RequireExistingRun();
         // TODO This returns the first element of the map, rather than a specific index. A cursor should be used to track id and traversal
-        return RunData.GetMap().Data;
+        return RunData.GetRoom().Data;
         //throw new NotImplementedException("Room Schematics not implemented");
+    }
+
+    public static int GetCurrentDepth()
+    {
+        RequireExistingRun();
+        return RunData.GetRoom().Level;
+    }
+
+    public static int GetMaxDepth()
+    {
+        // Technically doesn't RequireExistingRun();
+        return RoomTreeFactory.MAX_DEPTH;
     }
 
     public static List<RoomNode> GetDestinationCandidatesForCurrentRoom()
     {
         RequireExistingRun();
         List<RoomNode> destinations = new List<RoomNode>();
-        foreach (TreeNode<RoomNode> child in RunData.GetMap().Children)
+        foreach (TreeNode<RoomNode> child in RunData.GetRoom().Children)
         {
             destinations.Add(child.Data);
         }
         return destinations;
+    }
+
+    public static void AdvanceToRoomId(int id)
+    {
+        // Find child of current room that has ID
+        TreeNode<RoomNode> found = RunData.GetRoom().FindTreeNode(node => node.Data != null && node.Data.Id == id);
+        if (found == null)
+        {
+            throw new Exception("Room id " + id + " doesn't exist");
+        }
+        RunData.AdvanceToRoom(found);
     }
 
     private static void MillRandomComponent(string component, int iterations)
