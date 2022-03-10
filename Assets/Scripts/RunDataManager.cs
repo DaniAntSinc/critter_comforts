@@ -46,6 +46,12 @@ public static class RunDataManager
         throw new NotImplementedException("Custom RNG not implemented");
     }
 
+    public static void CheckExtensionNeeded()
+    {
+        // TODO If the current node's a leaf and isn't at the needed depth, populate again.
+        Debug.Log("[NE] Skipping extension check");
+    }
+
     /*
      * Navigate the RunData structure to get the information associated with the current room
      */
@@ -57,9 +63,15 @@ public static class RunDataManager
         //throw new NotImplementedException("Room Schematics not implemented");
     }
 
-    public static void GetDestinationCandidatesForCurrentRoom()
+    public static List<RoomNode> GetDestinationCandidatesForCurrentRoom()
     {
         RequireExistingRun();
+        List<RoomNode> destinations = new List<RoomNode>();
+        foreach (TreeNode<RoomNode> child in RunData.GetMap().Children)
+        {
+            destinations.Add(child.Data);
+        }
+        return destinations;
     }
 
     private static void MillRandomComponent(string component, int iterations)

@@ -14,17 +14,17 @@ public class RoomNode
         Event_Finish = 5,
     }
 
-    private int id;
-    private int level;
-    private string biome;
+    public int Id { get; private set; }
+    public int Level { get; private set; }
+    public string Biome { get; private set; }
 
     private List<Component> components;
 
     public RoomNode(int id, int level, string biome)
     {
-        this.id = id;
-        this.level = level;
-        this.biome = biome;
+        this.Id = id;
+        this.Level = level;
+        this.Biome = biome;
 
         this.components = new List<Component>();
     }
@@ -38,6 +38,6 @@ public class RoomNode
 
     public override string ToString()
     {
-        return String.Format("{0} {1} {2}", id, level, biome);
+        return String.Format("ID {0} Depth {1} Biome {2}", Id, Level, Biome);
     }
 }

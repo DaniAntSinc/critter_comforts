@@ -23,6 +23,7 @@ public static class RunData
     // Run Data
     private static int Score; // Rather than a single integer, the score will be composed of different pieces. Maybe a score SO, instead?
     private static TreeNode<RoomNode> Map;
+    private static int CurrentRoom; // ???
     //[Not yet implemented] private Creature[] Team
 
     // Clear out all data from any previous runs
