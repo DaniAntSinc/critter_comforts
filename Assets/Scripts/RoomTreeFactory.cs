@@ -6,7 +6,7 @@ public class RoomTreeFactory
 {
     public const int MAX_DEPTH = 10;
     // Rather than const arrays, a config should be used to allow custom runs, like all bosses
-    // These are zero-indexed - the 10th room has index 9.
+    // These are one-indexed. The boss will occur 9 levels into the run
     private readonly int[] BOSS_LEVELS = { 9 };
     private readonly int[] MINIBOSS_LEVELS = { 4 };
     private readonly int[] SHOP_LEVELS = { 3, 5, 8 };
