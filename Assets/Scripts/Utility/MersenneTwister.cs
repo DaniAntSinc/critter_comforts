@@ -11,8 +11,13 @@ public class MersenneTwister
     private ulong[] mt;
     private ulong mti;
 
+    // Track the number of uses for consistency after storage
+    public uint ConsumedRolls { get; private set; }
+
     public MersenneTwister(ulong seed)
     {
+        ConsumedRolls = 0;
+
         mt = new ulong[N];
         mt[0] = seed & 0xFFFF_FFFFUL;
         for (mti = 1; mti < N; mti++)
@@ -56,6 +61,7 @@ public class MersenneTwister
         y ^= (y << 15) & 0xefc60000UL;
         y ^= (y >> 18);
 
+        ConsumedRolls++;
         return y;
     }
 
