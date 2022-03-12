@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position += moveDirection * speed;
 
-        playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, Quaternion.LookRotation(new Vector3(xDirection, 0.0f, zDirection)), Time.deltaTime * 100);
+        if (moveDirection != Vector3.zero)
+        {
+            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, Quaternion.LookRotation(new Vector3(xDirection, 0.0f, zDirection)), Time.deltaTime * 100);
+        }
     }
 }
