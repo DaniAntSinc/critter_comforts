@@ -1,47 +1,94 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 
 public class Random
 {
-    private uint seed;
+    private ulong seed;
     // Used in Box-Muller transform for Gaussian RNG
-    private ulong? last;
+    private double last;
     private MersenneTwister rng;
 
-    public Random(string s = null)
+    public Random()
     {
-        // TODO Resolve namespace issues
-        seed = 1;
-        if (s != null)
-        {
-            // seed = hexdec(hash("crc32", s)) % (2 << 31 - 1);
-        }
+        System.Random seeder = new System.Random();
+        seed = (ulong)seeder.Next();
 
-        last = null;
         rng = new MersenneTwister(seed);
     }
 
-    public float Float(float min = 0f, float max = 1f)
+    public Random(ulong s)
     {
-        return 0.0f;
+        seed = s;
+        rng = new MersenneTwister(seed);
     }
 
-    public float Normal(float mean, float sd, float? clampMin = null, float? clampMax = null)
+    // The three constructor types are mostly to plan for saving/loading systems.
+    // However, a game run will have one seed, which will be stored alongside the component's name.
+    // The string-based and one of (ulong, System.Random) should be needed.
+    public Random(string s)
     {
-        // stuff
-        return 0.0f;
+        seed = ConvertStringToSeed(s);
+
+        rng = new MersenneTwister(seed);
     }
 
-    public float Normal(int mean, int sd, int? clampMin = null, int? clampMax = null)
+    private ulong ConvertStringToSeed(string s)
     {
-        return 0.0f;
+        // The Songbird implementation used CRC32, but this should work equally well for our purposes
+        ulong hash = (ulong)seed.GetHashCode();
+        // The modulus shouldn't be needed.
+        // If something else down the line is breaking, then it should probably be dropped from ulong.MaxValue to something like (2 << 31 - 1) just for familiarity.
+        return hash % ulong.MaxValue;
     }
 
-    public int Int(int min, int max)
+    public double Double(double min = 0f, double max = 1f)
     {
-        return 0;
+        return min + rng.Real() * (max - min);
+    }
+
+    public double Normal(double mean, double sd)
+    {
+        if (last == default(double))
+        {
+            last = Double();
+        }
+        double current = Double();
+        double root = sd * Math.Sqrt(-2 * Math.Log(last));
+        double zNought = root * Math.Cos(2 * Math.PI * current) + mean;
+        double zOne = root * Math.Sin(2 * Math.PI * current) + mean;
+        last = current;
+
+        return zOne;
+    }
+
+    public double Normal(double mean, double sd, double clampMin)
+    {
+        return Math.Max(clampMin, Normal(mean, sd));
+    }
+
+    public double Normal(double mean, double sd, double clampMin, double clampMax)
+    {
+        return Math.Min(clampMax, Normal(mean, sd, clampMin));
+    }
+
+    public int Normal(int mean, int sd, int? clampMin = null, int? clampMax = null)
+    {
+        return (int)Normal((double)mean, (double)sd, (double)clampMin, (double)clampMax);
+    }
+
+    public int Int(int min = 0, int max = 100)
+    {
+        // There might be an issue with this value.
+        return (int)Double((double)min, (double)max);
+    }
+
+    // Returns a random element from list
+    // If the list is empty, that would be a problem.
+    public T Element<T>(T[] list)
+    {
+        int key = Int(0, list.Length);
+        return list[key];
     }
 
     /*

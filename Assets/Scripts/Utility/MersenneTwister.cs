@@ -65,37 +65,10 @@ public class MersenneTwister
         return y;
     }
 
-    public ulong Int31()
-    {
-        return (ulong)(Int32() >> 1);
-    }
-
-    /* generates a random number on [0,1]-real-interval */
-    public double genrand_real1()
-    {
-        return Int32() * (1.0 / 4294967295.0);
-        /* divided by 2^32-1 */
-    }
-
     /* generates a random number on [0,1)-real-interval */
-    public double Ieal2()
+    public double Real()
     {
         return Int32() * (1.0 / 4294967296.0);
         /* divided by 2^32 */
-    }
-
-    /* generates a random number on (0,1)-real-interval */
-    public double genrand_real3()
-    {
-        return (((double)Int32()) + 0.5) * (1.0 / 4294967296.0);
-        /* divided by 2^32 */
-    }
-
-    /* generates a random number on [0,1) with 53-bit resolution*/
-    public double genrand_res53()
-    {
-        ulong a = Int32() >> 5;
-        ulong b = Int32() >> 6;
-        return (a * 67108864.0 + b) * (1.0 / 9007199254740992.0);
     }
 }
