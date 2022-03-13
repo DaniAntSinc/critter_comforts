@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class PortalStatus : MonoBehaviour
 {
-    public string destination;
+    private string destination;
+    private int id;
     // Current, absolute state of the portal
-    [SerializeField]
-    private string status;
+    [SerializeField] private string status;
 
     // Start is called before the first frame update
     void Start()
@@ -16,14 +16,9 @@ public class PortalStatus : MonoBehaviour
         this.SetStatus("inert");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetDestination(int id, string destination)
     {
-        
-    }
-
-    public void SetDestination(string destination)
-    {
+        this.id = id;
         this.destination = destination;
     }
 
@@ -31,6 +26,11 @@ public class PortalStatus : MonoBehaviour
     {
         // TODO Better data structure
         return this.destination;
+    }
+
+    public int GetId()
+    {
+        return this.id;
     }
 
     public void SetStatus(string status)
