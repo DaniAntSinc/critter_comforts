@@ -40,6 +40,11 @@ public static class RunData
         Seed = seed;
     }
 
+    public static string GetBaseSeed()
+    {
+        return Seed;
+    }
+
     public static void SetMap(TreeNode<RoomNode> root)
     {
         // Where's the cursor?

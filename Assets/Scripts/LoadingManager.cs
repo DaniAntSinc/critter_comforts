@@ -43,9 +43,8 @@ public class LoadingManager : MonoBehaviour
         RunDataManager.CheckExtensionNeeded();
 
         UpdateLabel("Navigating Aether");
-        SceneManager.LoadSceneAsync((int)SceneIndexes.ROOM_INSTANCE, LoadSceneMode.Additive);
-        yield return new WaitForSeconds(0.5f);
-        // Portal instantiation isn't happening in the correct scene.
+        yield return SceneManager.LoadSceneAsync((int)SceneIndexes.ROOM_INSTANCE, LoadSceneMode.Additive);
+        yield return new WaitForSeconds(0.6f);
 
         SceneManager.SetActiveScene(SceneManager.GetSceneAt((int)SceneIndexes.ROOM_INSTANCE));
         UpdateLabel("Conjuring Fragments...");

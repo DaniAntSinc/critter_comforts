@@ -45,7 +45,6 @@ public class Initialization : MonoBehaviour
         Initialization.currentStage = InitializationStage.Portals;
         Vector3 basePosition = new Vector3(-6.92f, 2.13f, -8f);
         Quaternion baseRotation = Quaternion.Euler(0f, 90f, 0f);
-        string[] destination = new string[] { "swamp", "desert", "volcano", "forest", "mystery" };
 
         List<RoomNode> destinations = RunDataManager.GetDestinationCandidatesForCurrentRoom();
         foreach (RoomNode node in destinations)

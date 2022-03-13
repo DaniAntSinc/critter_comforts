@@ -6,6 +6,7 @@ using UnityEngine;
 // Interface with the RunData storage
 public static class RunDataManager
 {
+    private static Dictionary<string, Random> rngCache;
     /*
      * Returns a bool that indicates whether there is a run that can be loaded
      * Should be a combination of state and save data
@@ -41,9 +42,23 @@ public static class RunDataManager
      * The purpose of this is to remove any impact on the RNG of one system on another component,
      * so changing the number of nodes created by the map won't influence enemy behavior.
      */
-    public static void GetRandomUtilForComponent(string component)
+    public static Random GetRandomUtilForComponent(string component)
     {
-        throw new NotImplementedException("Custom RNG not implemented");
+        if (rngCache == null)
+        {
+            rngCache = new Dictionary<string, Random>();
+        }
+        // Honestly, not sure if RNG should be managed here or RunData. At the very least,
+        // saving would need base seed, [](component + rolls)
+        if (rngCache.ContainsKey(component))
+        {
+            return rngCache[component];
+        }
+
+        string catSeed = String.Format("{0}.{1}", RunData.GetBaseSeed(), component);
+
+        rngCache[component] = new Random(catSeed);
+        return rngCache[component];
     }
 
     public static void CheckExtensionNeeded()

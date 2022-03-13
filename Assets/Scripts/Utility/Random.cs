@@ -33,6 +33,11 @@ public class Random
         rng = new MersenneTwister(seed);
     }
 
+    public uint GetConsumedRolls()
+    {
+        return rng.ConsumedRolls;
+    }
+
     private ulong ConvertStringToSeed(string s)
     {
         // The Songbird implementation used CRC32, but this should work equally well for our purposes
