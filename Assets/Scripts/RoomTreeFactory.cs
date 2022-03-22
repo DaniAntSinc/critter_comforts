@@ -22,7 +22,7 @@ public class RoomTreeFactory
 
     private RoomNode CreateVictoryRoom()
     {
-        RoomNode leaf = new RoomNode(nodeCount++, MAX_DEPTH, "mystery");
+        RoomNode leaf = new RoomNode(nodeCount++, MAX_DEPTH, "victory");
         leaf.AddComponent(RoomNode.Component.Bonding_Basic);
         leaf.AddComponent(RoomNode.Component.Event_Finish);
         return leaf;
@@ -30,7 +30,10 @@ public class RoomTreeFactory
 
     private RoomNode CreateRoomNode(int current_depth)
     {
-        RoomNode node = new RoomNode(nodeCount++, current_depth, "mystery");
+        Random r = RunDataManager.GetRandomUtilForComponent("map");
+        string[] roomOptions = { "mystery", "swamp", "desert", "volcano", "forest" };
+        RoomNode node = new RoomNode(nodeCount++, current_depth, r.Element(roomOptions));
+
         if (BOSS_LEVELS.Contains(current_depth))
         {
             node.AddComponent(RoomNode.Component.Fight_Boss);
